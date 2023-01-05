@@ -33,7 +33,7 @@ for ii = 1:length(sq_vals)
 end
 
 disp('Probabilidades de erro (teórica):');
-fprintf('%0.6f\n', normcdf(-1, 0, sqrt(sq_vals)));
+fprintf('%0.6f\n', qfunc(1 ./ sqrt(sq_vals)));
 disp('Probabilidades de erro (estimada):');
 fprintf('%0.6f\n', pe);
 

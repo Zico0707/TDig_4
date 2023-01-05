@@ -39,18 +39,18 @@ for ii = 1:length(sq_vals)
     recebido = squeeze(out.rec.data(2:end));
     pe(ii) = sum(abs(sequencia - recebido)) / length(sequencia);
     N0 = 2 * sigmaquadrado / fs;
-    rEN(ii) = Eb/N0;
+    rEN(ii) = 10 * log10(Eb/N0);
 end
 
 disp('Probabilidades de erro (teórica):');
-fprintf('%0.6f\n', normcdf(-1, 0, sqrt(sq_vals / 100)));
+fprintf('%0.6f\n', qfunc(1 ./ sqrt(sq_vals / 100)));
 disp('Probabilidades de erro (estimada):');
 fprintf('%0.6f\n', pe);
 disp('Razão Eb/N0 [dB]:');
 disp(rEN);
 
 figure(1);
-plot(rEN, pe, "LineWidth", 2);
+semilogy(rEN, pe, "LineWidth", 2);
 xlabel('$E_b/N_0$ [dB]', 'Interpreter', 'latex', 'FontSize', 18);
 ylabel('$P_e$', 'Interpreter', 'latex', 'FontSize', 18);
 set(gca, 'TickLabelInterpreter', 'latex');
